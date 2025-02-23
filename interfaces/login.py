@@ -3,10 +3,11 @@ from tkinter import messagebox
 import sqlite3
 
 class LoginPage:
-    def __init__(self, root, role, interface_class):
+    def __init__(self, root, role, interface_class, choose_role):
         self.root = root
         self.role = role
         self.interface_class = interface_class
+        self.choose_role = choose_role  # Save the function for later use
         self.frame = tk.Frame(root, bg='#E8F0F2')
         self.frame.pack(fill='both', expand=True)
 
@@ -24,6 +25,9 @@ class LoginPage:
 
         # Login button
         tk.Button(self.frame, text="Login", command=self.login, width=10, bg='#3498DB', fg='white').pack(pady=10)
+        
+        # Back button
+        tk.Button(self.frame, text="Back", command=self.go_back, width=10, bg='#E74C3C', fg='white').pack(pady=5)
 
     def login(self):
         username = self.username_entry.get()
@@ -51,3 +55,8 @@ class LoginPage:
                 messagebox.showerror("Error", "Invalid username or password.")
 
             connection.close()
+
+    def go_back(self):
+        """Handle going back to the main page."""
+        self.frame.destroy()  # Clear current frame
+        self.choose_role()  # Call the function to display the role selection page

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk  # For better styling
 from interfaces.login import LoginPage
-from interfaces.signup import SignUpPage  # New SignUpPage
+from interfaces.signup import SignUpPage
 from interfaces.admin import AdminPage
 from interfaces.staff import StaffPage
 from interfaces.student import StudentPage
@@ -46,7 +46,7 @@ def choose_role():
         button.configure(width=15, style='TButton')
 
     # Sign Up button (excluding Admin)
-    signup_button = ttk.Button(button_frame, text="Sign Up", command=lambda: show_signup())
+    signup_button = ttk.Button(button_frame, text="Sign Up", command=show_signup)
     signup_button.pack(side=tk.LEFT, padx=10, pady=10)
     signup_button.configure(width=15, style='TButton')
 
@@ -56,7 +56,7 @@ def show_login(role, interface_class):
         widget.destroy()
     
     # Initialize the login page with the role and interface class
-    LoginPage(root, role, interface_class)
+    LoginPage(root, role, interface_class, choose_role)  # Pass choose_role
 
 def show_signup():
     """Display the sign-up page."""
